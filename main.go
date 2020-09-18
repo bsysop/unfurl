@@ -222,7 +222,11 @@ func format(u *url.URL, f string) []string {
 
 		// the path; e.g. /users
 		case 'p':
-			out.WriteString(u.EscapedPath())
+			if len(u.EscapedPath()) > 0 {
+				out.WriteString(u.EscapedPath())
+			} else {
+				out.WriteString(u.EscapedPath() + "/")
+			}
 
 		// the query string; e.g. one=1&two=2
 		case 'q':
